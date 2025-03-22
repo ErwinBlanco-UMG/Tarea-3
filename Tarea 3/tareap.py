@@ -1,20 +1,21 @@
 import os
 import csv
 from graphviz import Digraph
-
+#la clase nodoA inicializa punteros y un valor
 class nodoA:
     def __init__(self, valor):
         self.valor = valor
         self.izquierda = None
         self.derecha = None
-
+#La Clase ABB inicializa una raiz de un nuevo arbol
 class ABB:
+    #inicializa la clase
     def __init__(self):
         self.raiz = None
-
+    #def insertar, agrega un nuevo valor inicial (raiz al nuevo arbol como base)
     def insertar(self, valor):
         self.raiz = self.agregar(self.raiz, valor)
-
+    #def agregar busca si tiene un valor inicial y si ya tiene los compara y si es mayor lo envia a la derecha si es menor a la izquierda
     def agregar(self, nodo, valor):
         if nodo is None:
             return nodoA(valor)
@@ -23,7 +24,7 @@ class ABB:
         else:
             nodo.derecha = self.agregar(nodo.derecha, valor)
         return nodo
-
+    # def buscador, busca el nodo que uno desea
     def buscador(self, nodo, valor):
         if nodo is None or nodo.valor == valor:
             return nodo
@@ -31,10 +32,10 @@ class ABB:
             return self.buscador(nodo.derecha, valor)
         elif nodo.valor > valor:
             return self.buscador(nodo.izquierda, valor)
-
+    #def elimina, elimina el nodo que uno desea
     def elimina(self, valor):
         self.raiz = self._eliminar(self.raiz, valor)
-
+    #del eliminar, elimina el nodo ya sea donde se encuentre ubicado y rehace el arbol
     def _eliminar(self, nodo, valor):
         if nodo is None:
             return nodo
@@ -51,17 +52,17 @@ class ABB:
             nodo.valor = sucesor.valor
             nodo.derecha = self._eliminar(nodo.derecha, sucesor.valor)
         return nodo
-
+    #def minimo, encuentra el minimo del arbol derecho o nodo con un solo hijo o sin hijos
     def _minimo(self, nodo):
         actual = nodo
         while actual.izquierda is not None:
             actual = actual.izquierda
         return actual
-
+    #def borrar arbol, elimina el arbol completo
     def borrar_arbol(self):
         self.raiz = None
         print("SE ELIMINO EL ARBOLITO/anterior de registros :)")
-
+    #pinta una nueva grafica sobre el arbol que esta creando
     def visualizar(self, nodo, nombre="arbol"):
         if nodo is None:
             print("El árbol está vacío. No se puede generar la imagen.")
@@ -74,7 +75,7 @@ class ABB:
         ruta_png = f"output/{nombre}"
         dot.render(ruta_png, format="png", cleanup=True)
         print(f"Imagen PNG generada: {ruta_png}.png")
-
+    #El def generar, genera un nuevo nodo
     def _generar(self, dot, nodo):
         if nodo:
             dot.node(str(nodo.valor))
@@ -84,7 +85,7 @@ class ABB:
             if nodo.derecha:
                 dot.edge(str(nodo.valor), str(nodo.derecha.valor))
                 self._generar(dot, nodo.derecha)
-
+    #El def cargar_archivo, carga un archivo ya sea txt o CSV y lo agrega al arbol existente
     def cargar_archivo(self):
         try:
             ruta = input("Ingrese la ruta del archivo .txt o .csv: ")
@@ -119,7 +120,13 @@ def menu():
         print("5. Cargar desde archivo (.txt o .csv)")
         print("6. Mostrar Graphviz")
         print("7. SALIR")
-
+#La opcion 1 agrega un nuevo nodo al arbol existente y lo coloca segun la validación si es mayor o menor
+#La opción 2 recorre el arbol y busca el nodo que necesitamos
+#La opción 3 elimina el nodo que ya no es necesario, para ello recorre el arbol y realiza la busqueda
+#La opción 4 elimina todo el arbol desde la raiz
+#La opción 5 realiza la carga de archivo desde un archivo existente ya sea txt o CSV y extrae todos los numeros y los agrega al arbol existente
+#La opción 6 Genera la grafica por medio de la libreria Graphviz
+#La opción 7 nos finaliza el programa
         try:
             opcion = input("SELECCIONE UNA OPCIÓN: ")
 
