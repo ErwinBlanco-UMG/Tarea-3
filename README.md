@@ -1,5 +1,5 @@
-Erwin Fernando Blanco Melendres 9490-23-7748
-Sara Abigail Solis Ixquiactap 94902312295
+Erwin Fernando Blanco Melendres 9490-23-7748 100%
+Sara Abigail Solis Ixquiactap 9490-23-12295  100%
 
 1. Arbol de Busqueda Binaria (ABB)
 Este proyecto implementa un árbol de búsqueda en Python, permitiendo la inserción, eliminación, Carga de archivos .txt y .csv, visualización en representación gráfica de los nodos.
